@@ -52,15 +52,7 @@ def main():
         print "\n[+]----------------------------------------------------------------------------------[+]"
     except:
         print "[+]------------------------- MINING STATISTICS by b0lsh3v1k -------------------------[+]\n"
-        print "[POOL]\n"
-        print "     Hashrate: " + "[MINER DISCONNECTED]"
-        print "     Unpaid Balance: 0." + str(("{0:.0f}".format(UnpaidBalance))) + " ETH" #Limited to 18 decimals
-        print "     Estimated monthly earnings: " + str(EarningsMonth) + " $"
-        print "\n[ETHER]\n"
-        print "     Ether Price: " + str(EtherPrice) + " $"
-        print ("     Ether Market Capita: ${:,.2f}".format(EtherMarketCap)) + " $" #commas every 3 digits for better reading
-        print "\n[BITCOIN]\n"
-        print "     Bitcoin Price: " + str(BitcoinPrice) + " $"
+        print "[MINER DISCONNECTED]"
         print "\n[+]----------------------------------------------------------------------------------[+]"
 
 
