@@ -36,13 +36,16 @@ def main():
 
         ETHperMH = 0.2312074866310160427807486631016
         EarningsMonth = (ETHperMH * Hashrate) * EtherPrice
+        Unpaidformatted = str(("{0:.0f}".format(UnpaidBalance)))
+        UnpaidUSD = EtherPrice * float(Unpaidformatted)
+
 
 
         #INTERFACE
         print "[+]------------------------- MINING STATISTICS by b0lsh3v1k -------------------------[+]\n"
         print "[POOL]\n"
         print "     Hashrate: " + str(Hashrate) + " MH/s"
-        print "     Unpaid Balance: 0." + str(("{0:.0f}".format(UnpaidBalance))) + " ETH" #Limited to 18 decimals
+        print "     Unpaid Balance: 0." + Unpaidformatted + " ETH ("  + str(UnpaidUSD) + " $)" #Limited to 18 decimals
         print "     Estimated monthly earnings: " + str(EarningsMonth) + " $"
         print "\n[ETHER]\n"
         print "     Ether Price: " + str(EtherPrice) + " $"
@@ -55,7 +58,7 @@ def main():
         print "[MINER DISCONNECTED]"
         print "\n[+]----------------------------------------------------------------------------------[+]"
 
-
+main()
 while True:
     time.sleep(15) #15s updates
     main()
