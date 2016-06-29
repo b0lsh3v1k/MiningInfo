@@ -39,24 +39,53 @@ def main():
         Unpaidformatted = str(("{0:.0f}".format(UnpaidBalance)))
         UnpaidUSD = EtherPrice * float(Unpaidformatted)
 
+        #Wallets
+        Wallet1Data = requests.get("https://api.etherscan.io/api?module=account&action=balance&address=0x8B283ba96C1c6F1fb94789a43F33053D59952EEA&tag=latest&apikey=GNMNHGPQBXXT5VA2R47QZ7ZINSQNWD8AV9")
+        Wallet1DataTXT = Wallet1Data.text
+        Wallet1Start = '''"result":"'''
+        Wallet1End = '''"}'''
+        Wallet1Ammount = float((Wallet1DataTXT.split(Wallet1Start))[1].split(Wallet1End)[0])
+        Wallet1AmmountB = str(Wallet1Ammount)[0:10] #10 digits
+        Wallet1AmmountC = float(Wallet1AmmountB) * 10
+        Wallet1USD = float(Wallet1AmmountC) * EtherPrice
+
+        Wallet2Data = requests.get("https://api.etherscan.io/api?module=account&action=balance&address=0x769F2177A1dcE05b120A8409Ab8D70d19E8Ab9bC&tag=latest&apikey=GNMNHGPQBXXT5VA2R47QZ7ZINSQNWD8AV9")
+        Wallet2DataTXT = Wallet2Data.text
+        Wallet2Start = '''"result":"'''
+        Wallet2End = '''"}'''
+        Wallet2Ammount = float((Wallet2DataTXT.split(Wallet2Start))[1].split(Wallet2End)[0])
+        Wallet2AmmountB = str(Wallet2Ammount)[0:10] #10 digits
+        Wallet2AmmountC = float(Wallet2AmmountB) * 10
+        Wallet2USD = float(Wallet2AmmountC) * EtherPrice
+
 
 
         #INTERFACE
-        print "[+]------------------------- MINING STATISTICS by b0lsh3v1k -------------------------[+]\n"
+        print "[+]------------------------- MINING INFORMATION by b0lsh3v1k -------------------------[+]\n"
         print "[POOL]\n"
         print "     Hashrate: " + str(Hashrate) + " MH/s"
-        print "     Unpaid Balance: 0." + Unpaidformatted + " ETH ("  + str(UnpaidUSD) + " $)" #Limited to 18 decimals
-        print "     Estimated monthly earnings: " + str(EarningsMonth) + " $"
+        print "     Unpaid Balance: 0." + Unpaidformatted + " ETH ("  + str(UnpaidUSD)[0:8] + " $)" #Limited to 18 decimals ETH and 8 digits USD
+        print "     Estimated monthly earnings: " + str(EarningsMonth)[0:8] + " $"
         print "\n[ETHER]\n"
         print "     Ether Price: " + str(EtherPrice) + " $"
+        print "     Wallet [1] ammount: " + str(Wallet1AmmountC) + " ETH (" + str(Wallet1USD)[0:8] + " $)"
+        print "     Wallet [2] ammount: " + str(Wallet2AmmountC) + " ETH (" + str(Wallet2USD)[0:8] + " $)"
         print ("     Ether Market Capita: ${:,.2f}".format(EtherMarketCap)) + " $" #commas every 3 digits for better reading
         print "\n[BITCOIN]\n"
         print "     Bitcoin Price: " + str(BitcoinPrice) + " $"
-        print "\n[+]----------------------------------------------------------------------------------[+]"
+        print "\n[+]-----------------------------------------------------------------------------------[+]"
     except:
-        print "[+]------------------------- MINING STATISTICS by b0lsh3v1k -------------------------[+]\n"
-        print "[MINER DISCONNECTED]"
-        print "\n[+]----------------------------------------------------------------------------------[+]"
+        print "[+]------------------------- MINING INFORMATION by b0lsh3v1k -------------------------[+]\n"
+        print "[POOL]\n"
+        print "     [MINER DISCONNECTED]"
+        print "\n[ETHER]\n"
+        print "     Ether Price: " + str(EtherPrice) + " $"
+        print "     Wallet [1] ammount: " + str(Wallet1AmmountC) + " ETH (" + str(Wallet1USD)[0:8] + " $)"
+        print "     Wallet [2] ammount: " + str(Wallet2AmmountC) + " ETH (" + str(Wallet2USD)[0:8] + " $)"
+        print ("     Ether Market Capita: ${:,.2f}".format(EtherMarketCap)) + " $" #commas every 3 digits for better reading
+        print "\n[BITCOIN]\n"
+        print "     Bitcoin Price: " + str(BitcoinPrice) + " $"
+        print "\n[+]-----------------------------------------------------------------------------------[+]"
 
 main()
 while True:
